@@ -1,0 +1,41 @@
+<div class="w-full h-full flex">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="max-w-md m-auto w-full flex flex-col">
+    <h1 class="font-bold text-center mb-10">Log in to get started</h1>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your email!">
+        <div class="">
+          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+          <input formControlName="email" type="email" id="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 "
+            placeholder="name@flowbite.com" required />
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <div>
+          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+          <div class="relative">
+            <input formControlName="password" [type]="showPassword ? 'text' : 'password'" id="password"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full py-2.5 pl-2.5 pr-14"
+              required />
+            <i (click)="showPassword=!showPassword"
+              class="fa-regular text-lg cursor-pointer absolute top-[50%] -translate-y-[50%] right-2.5"
+              [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </div>
+        </div>
+        <div class="float-right">
+          <a href="#" class="text-blue2">Forgot password ?</a>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <button type="submit"
+      class="w-full p-2 rounded-xl text-white bg-primary text-lg font-bold border border-primary mb-2">Login</button>
+
+    <a [routerLink]="['/auth/sign-up']">
+      <button class="w-full p-2 rounded-xl text-black bg-white text-lg font-bold border border-primary">
+        Sign Up
+      </button>
+    </a>
+  </form>
+</div>

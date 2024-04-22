@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IToken } from 'src/app/core/models/common/response-data.model';
+import { selectToken } from 'src/app/core/store/auth/auth.reducer';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
-
+export class DashboardComponent implements OnInit {
+  token!: IToken;
+  constructor(
+    private store: Store
+  ) { }
+  ngOnInit(): void {
+    this.store.select(selectToken).subscribe((token) => {
+      this.token = token;
+    });
+  }
 }

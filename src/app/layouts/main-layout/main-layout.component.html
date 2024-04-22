@@ -1,4 +1,20 @@
-<app-main-header></app-main-header>
+<!-- <app-main-header></app-main-header>
 <app-main-sidebar></app-main-sidebar>
 <p>main-layout works!</p>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<nz-layout class="h-full">
+  <nz-header>
+    <app-main-header class="w-full"></app-main-header>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzWidth="300px">
+      <app-main-sidebar></app-main-sidebar>
+    </nz-sider>
+    <nz-layout>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>

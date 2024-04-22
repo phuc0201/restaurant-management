@@ -1,0 +1,16 @@
+.sidebar-menu {
+  a {
+    @apply text-gray-500 max-h-20 flex items-center gap-3 hover:bg-green3 px-6 py-10 border-4 border-r-0 border-y-0 border-transparent;
+  }
+}
+.sidebar-menu {
+  a.sidebar-item-active {
+    @apply border-primary  bg-green3;
+  }
+}
+
+.sidebar-menu {
+  a span {
+    @apply text-lg;
+  }
+}

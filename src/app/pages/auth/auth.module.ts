@@ -7,13 +7,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     AuthComponent,
-    SignUpComponent
+    RegisterComponent
   ],
   imports: [
     CommonModule,

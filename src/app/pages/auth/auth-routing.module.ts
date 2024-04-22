@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
         title: 'Đăng nhập'
       },
       {
-        path: 'sign-up',
-        component: SignUpComponent,
+        path: 'register',
+        component: RegisterComponent,
         title: 'Đăng ký'
       }
     ]

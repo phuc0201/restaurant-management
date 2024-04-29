@@ -14,19 +14,32 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard-page/dashboard-page.module').then(m => m.DashboardPageModule)
+        loadChildren: () => import('./dashboard-page/dashboard-page.module').then(m => m.DashboardPageModule),
+        data: {
+          breadcrumb: 'Dashboard'
+        },
       },
       {
         path: 'order-history',
-        loadChildren: () => import('./order-history-page/order-history-page.module').then(m => m.OrderHistoryPageModule)
+        loadChildren: () => import('./order-history-page/order-history-page.module').then(m => m.OrderHistoryPageModule),
+        data: {
+          breadcrumb: 'Order history'
+        },
       },
       {
         path: 'pending-orders',
-        loadChildren: () => import('./pending-orders-page/pending-orders-page.module').then(m => m.PendingOrdersPageModule)
+        loadChildren: () => import('./pending-orders-page/pending-orders-page.module').then(m => m.PendingOrdersPageModule),
+        data: {
+          breadcrumb: 'PendingOrder'
+        },
       },
       {
         path: 'restaurant',
-        loadChildren: () => import('./restaurant-page/restaurant-page.module').then(m => m.RestaurantPageModule)
+        loadChildren: () => import('./restaurant-page/restaurant-page.module').then(m => m.RestaurantPageModule),
+        title: 'Restaurant',
+        data: {
+          breadcrumb: 'Restaurant'
+        },
       }
     ]
   },

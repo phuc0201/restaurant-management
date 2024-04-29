@@ -21,11 +21,20 @@ nz-content {
   line-height: 120px;
 }
 
-nz-layout {
-  margin-bottom: 48px;
-}
-
 nz-layout nz-layout,
 nz-layout:last-child {
   margin: 0;
+}
+
+.content-container-layout::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content-container-layout::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.content-container-layout::-webkit-scrollbar-thumb {
+  background-color: #00b14f;
+  outline: 1px solid transparent;
 }

@@ -25,6 +25,7 @@
     "@ngrx/store-devtools": "^16.2.0",
     "flowbite": "^2.3.0",
     "ng-zorro-antd": "^16.2.2",
+    "ngx-socket-io": "^4.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

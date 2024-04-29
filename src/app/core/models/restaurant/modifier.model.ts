@@ -3,3 +3,8 @@ export interface IModifier {
   name: string,
   price: number;
 }
+
+export interface IModifierDTO {
+  name: string;
+  price: number;
+}

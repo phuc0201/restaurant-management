@@ -19,9 +19,11 @@ export const initialResState: RestaurantState = {
       type: '',
       coordinates: []
     },
+    address: '',
     cover_image: '',
     avatar: '',
     tier: '',
+    review: ''
   },
   error: '',
   loading: false

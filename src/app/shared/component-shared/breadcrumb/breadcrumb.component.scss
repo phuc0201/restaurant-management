@@ -1,0 +1,8 @@
+::ng-deep .ant-breadcrumb a {
+  @apply text-gray-500 text-base;
+}
+::ng-deep .ant-breadcrumb > nz-breadcrumb-item:last-child,
+.ant-breadcrumb > nz-breadcrumb-item:last-child a,
+.ant-btn {
+  @apply text-gray-500;
+}

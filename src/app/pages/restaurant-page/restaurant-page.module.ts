@@ -1,31 +1,75 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { BreadcrumbComponent } from 'src/app/shared/component-shared/breadcrumb/breadcrumb.component';
 import { PanigationComponent } from 'src/app/shared/component-shared/panigation/panigation.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
-
+import { FoodItemDetailsComponent } from './food-item-details/food-item-details.component';
+import { FormFoodDetailsComponent } from './form-food-details/form-food-details.component';
+import { ListRestaurantFoodItemComponent } from './list-restaurant-food-item/list-restaurant-food-item.component';
+import { RestaurantContentComponent } from './restaurant-content/restaurant-content.component';
 const routes: Routes = [
   {
     path: '',
-    component: RestaurantComponent,
-    title: 'Restaurant'
-  }
+    component: RestaurantContentComponent,
+  },
+  {
+    path: 'food-details/:id',
+    component: FoodItemDetailsComponent,
+    title: 'Restaurant',
+    data: {
+      breadcrumb: 'Food-details'
+    },
+  },
+  // {
+  //   path: 'create-food',
+  //   component: FormFoodDetailsComponent,
+  //   title: 'Restaurant',
+  //   data: {
+  //     breadcrumb: 'Create new'
+  //   },
+  // }
 ];
 
 const plugins = [
-  PanigationComponent
+  PanigationComponent,
+  BreadcrumbComponent
 ];
 @NgModule({
   declarations: [
-    RestaurantComponent
+    ListRestaurantFoodItemComponent,
+    FoodItemDetailsComponent,
+    RestaurantContentComponent,
+    FormFoodDetailsComponent,
   ],
   imports: [
     CommonModule,
+    NzModalModule,
+    NzIconModule,
+    NzBreadCrumbModule,
+    NzUploadModule,
+    NzTabsModule,
     RouterModule.forChild(routes),
     NzTableModule,
     NzDividerModule,
+    NzInputModule,
+    NzSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzGridModule,
+    RouterModule,
     plugins
   ]
 })

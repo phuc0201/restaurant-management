@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 const plugins = [
   CommonModule,
@@ -13,5 +13,5 @@ const plugins = [
   imports: plugins
 })
 export class PanigationComponent {
-
+  @Input() pageNumber: number = 1;
 }

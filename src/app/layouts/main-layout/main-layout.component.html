@@ -12,9 +12,12 @@
       <app-main-sidebar></app-main-sidebar>
     </nz-sider>
     <nz-layout>
-      <nz-content>
-        <router-outlet></router-outlet>
-      </nz-content>
+      <div class="content-container-layout p-5 shadow-inner h-full bg-white overflow-y-auto overflow-x-hidden">
+        <div class="h-full">
+          <app-breadcrumb></app-breadcrumb>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </nz-layout>
   </nz-layout>
 </nz-layout>

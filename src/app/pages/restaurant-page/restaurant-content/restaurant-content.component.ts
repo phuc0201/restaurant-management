@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 interface Person {
   key: string;
@@ -7,13 +7,12 @@ interface Person {
   address: string;
 }
 
-
 @Component({
-  selector: 'app-restaurant',
-  templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.scss']
+  selector: 'app-restaurant-content',
+  templateUrl: './restaurant-content.component.html',
+  styleUrls: ['./restaurant-content.component.scss']
 })
-export class RestaurantComponent {
+export class RestaurantContentComponent implements OnInit {
   listOfData: Person[] = [
     {
       key: '1',
@@ -32,6 +31,11 @@ export class RestaurantComponent {
       name: 'Joe Black',
       age: 32,
       address: 'Sidney No. 1 Lake Park'
-    }
+    },
+
   ];
+
+  ngOnInit(): void {
+
+  }
 }

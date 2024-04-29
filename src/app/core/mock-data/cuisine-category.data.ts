@@ -1,0 +1,80 @@
+export const CuisineCategory = [
+  {
+    type: "MILK_TEA",
+    name: 'Milk tea',
+    slug: 'milk-tea',
+    img: 'assets/img/foods/milk-tea.jpg',
+  },
+  {
+    type: "DRINKS",
+    name: 'Drinks',
+    slug: 'drinks',
+    img: 'assets/img/foods/drink.jpg',
+  },
+  {
+    type: "BANH_MI",
+    name: 'Banh mi',
+    slug: 'banh-mi',
+    img: 'assets/img/foods/banh-mi.jpg',
+  },
+  {
+    type: "FAST_FOOD",
+    name: 'Fast food',
+    slug: 'fast-food',
+    img: 'assets/img/foods/fast-food.jpg',
+  },
+  {
+    type: "RICE",
+    name: 'Rice',
+    slug: 'rice',
+    img: 'assets/img/foods/rice.jpg',
+  },
+  {
+    type: "NOODLES",
+    name: 'Noodles',
+    slug: 'noodles',
+    img: 'assets/img/foods/noodles.jpg',
+  },
+  {
+    type: "CAKE",
+    name: 'Cake',
+    slug: 'cake',
+    img: 'assets/img/foods/cake.jpg',
+  },
+  {
+    type: "VEGAN_FOODS",
+    name: 'Vegan foods',
+    slug: 'vegan-foods',
+    img: 'assets/img/foods/vega-food.jpg',
+  },
+  {
+    type: "BBQ",
+    name: 'BBQ',
+    slug: 'bbq',
+    img: 'assets/img/foods/bbq.jpg',
+  },
+  {
+    type: "THAI_FOOD",
+    name: 'Thailand food',
+    slug: 'thailand-food',
+    img: 'assets/img/foods/thailand-food.jpg',
+  },
+  {
+    type: "JAPANESE_FOOD",
+    name: 'Japanese food',
+    slug: 'japanese-food',
+    img: 'assets/img/foods/japanese-food.jpg',
+  },
+  {
+    type: "KOREAN_FOOD",
+    name: 'Korean food',
+    slug: 'korean-food',
+    img: 'assets/img/foods/korean-food.jpg',
+  },
+  {
+    type: "CHINESE_FOOD",
+    name: 'Chinese food',
+    slug: 'chinese-food',
+    img: 'assets/img/foods/chinese-food.jpg',
+  },
+];

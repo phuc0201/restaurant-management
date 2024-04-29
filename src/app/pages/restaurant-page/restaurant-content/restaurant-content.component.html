@@ -1,0 +1,55 @@
+<nz-tabset nzSize="large">
+  <nz-tab nzTitle="MENU">
+    <app-list-restaurant-food-item></app-list-restaurant-food-item>
+  </nz-tab>
+  <nz-tab nzTitle="DANH MỤC">
+    <!-- <ng-container [ngTemplateOutlet]="restaurantMenuTemplate"></ng-container> -->
+  </nz-tab>
+</nz-tabset>
+
+<!-- <ng-template #restaurantMenuTemplate>
+  <div class="w-full flex items-center justify-between mb-5">
+    <div></div>
+    <div class="flex items-center gap-5 ">
+      <div>
+        <input type="text" placeholder="Type the dish name"
+          class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+      </div>
+      <button class="bg-primary px-3 rounded-md text-white font-medium h-10">
+        <i class="fa-solid fa-plus"></i>
+        Thêm món mới
+      </button>
+    </div>
+  </div>
+
+  <div class="px-5 pt-5 pb-16 border border-gray-200 rounded-md">
+    <nz-table #basicTable [nzData]="listOfData" nzFrontPagination="false" [nzScroll]="{ y: '700px' }" class="h-full">
+      <thead>
+        <tr>
+          <th>Tên danh mục</th>
+          <th>Số món ăn</th>
+          <th [nzRight]="true" nzWidth="150px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td [nzRight]="true" class="flex">
+            <div class="flex items-center m-auto gap-1">
+              <a [routerLink]="['food-details']">
+                <button class="w-10 h-10 text-center bg-primary rounded-md text-white flex">
+                  <i class="fa-regular fa-eye m-auto"></i>
+                </button>
+              </a>
+              <button class="w-10 h-10 text-center bg-red rounded-md text-white flex">
+                <i class="fa-solid fa-xmark m-auto"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <app-panigation></app-panigation>
+  </div>
+</ng-template> -->

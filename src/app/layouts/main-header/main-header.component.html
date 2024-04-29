@@ -17,8 +17,20 @@
       </label>
     </div>
 
+    <div (click)="isNotificationsEnabled=!isNotificationsEnabled" nz-tooltip
+      [nzTooltipTitle]="isNotificationsEnabled ? 'Tắt thông báo' : 'Bật thông báo'" nzTooltipPlacement="bottom"
+      [nzTooltipArrowPointAtCenter]="false"
+      class="relative mr-5 w-10 h-10 flex  rounded-[50%] hover:bg-gray-100 cursor-pointer">
+      <nz-badge [nzCount]="notificationCount" class="m-auto">
+        <i class="fa-regular fa-bell text-xl text-gray-500"></i>
+      </nz-badge>
+    </div>
+
     <div class="cursor-pointer">
       <img loading="lazy" src="assets/img/avatars/restaurant-avatar.jpg" class="w-12 h-12 rounded-[50%] object-cover">
     </div>
   </nav>
 </header>
+
+
+<app-notification [isNotificationsEnabled]="isNotificationsEnabled"></app-notification>

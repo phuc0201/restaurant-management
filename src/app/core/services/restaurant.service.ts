@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { URLConstant } from '../constants/url.constant';
+import { CreateFoodItemDTO, IFoodItem } from '../models/restaurant/food_item.model';
 import { IRestaurant } from '../models/restaurant/restaurant.model';
 
 @Injectable({
@@ -19,5 +20,9 @@ export class RestaurantService {
 
   changeRestaurantStatus(isOpened: boolean): void {
     localStorage.setItem('isOpened', JSON.stringify(isOpened));
+  }
+
+  createFoodItem(dto: CreateFoodItemDTO): Observable<IFoodItem> {
+    return this.http.post<IFoodItem>(this.baseURL + URLConstant.API.RESTAURANT.CREATE_FOOD_ITEM, dto);
   }
 }

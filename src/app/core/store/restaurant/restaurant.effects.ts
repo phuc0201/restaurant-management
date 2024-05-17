@@ -19,4 +19,14 @@ export class RestaurantEffects {
       ))
     )
   );
+
+  _createFoodItem = createEffect(() =>
+    this.action$.pipe(
+      ofType(restuarantActions.createFoodItem),
+      exhaustMap((data) => this.restaurantService.createFoodItem(data.foodItem).pipe(
+        map(foodItem => restuarantActions.createFoodItemSucess({ foodItem })),
+        catchError(error => of(restuarantActions.createFoodItemFailure({ error: error })))
+      ))
+    )
+  );
 }

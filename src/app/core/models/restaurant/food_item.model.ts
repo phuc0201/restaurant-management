@@ -1,4 +1,4 @@
-import { IModifierGroups, IModifierGroupsDTO } from "./modifier-groups.mode";
+import { IModifierGroupsDTO } from "./modifier-groups.mode";
 
 export interface IFoodItem {
   id: string;
@@ -6,14 +6,17 @@ export interface IFoodItem {
   bio: string;
   image: string;
   price: number;
-  modifier_groups: IModifierGroups[];
+  modifier_groups: string[];
 }
 
-export interface IFoodItemDTO {
-  name: string;
-  bio: string;
-  image: string;
-  price: number;
-  modifier_groups: IModifierGroupsDTO[];
+export class FoodItemDTO {
+  name!: string;
+  bio?: string;
+  image?: File;
+  price!: number;
+  modifier_groups!: IModifierGroupsDTO[];
 }
 
+export class CreateFoodItemDTO extends FoodItemDTO {
+  category_id!: string;
+}

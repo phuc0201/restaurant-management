@@ -4,10 +4,11 @@ export const URLConstant = {
   API: {
     END_POINT: environment.serverTestUrl,
     AUTH: {
-      LOGIN: ''
+      SIGNIN: '/auth/restaurant/signin'
     },
     RESTAURANT: {
-      PROFILE: '/restaurant/info'
+      PROFILE: '/restaurant/info',
+      CREATE_FOOD_ITEM: '/restaurant/fooditem'
     }
   }
 };

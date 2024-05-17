@@ -1,0 +1,7 @@
+<div nz-row class="items-center justify-between p-5 border border-gray-200 shadow-sm rounded-lg mb-5">
+  <h1 class="m-0 font-medium">Thêm món mới</h1>
+  <button (click)="create()" class="px-3 py-2 bg-primary text-white font-medium rounded-md">
+    Create now
+  </button>
+</div>
+<app-form-food-details [(foodDetails)]="foodDetails"></app-form-food-details>

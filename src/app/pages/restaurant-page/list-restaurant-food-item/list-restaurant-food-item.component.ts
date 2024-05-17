@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RestaurantsMockData } from 'src/app/core/mock-data/restaurants.data';
 import { IFoodItem } from 'src/app/core/models/restaurant/food_item.model';
 
 @Component({
@@ -17,7 +16,13 @@ export class ListRestaurantFoodItemComponent {
     price: 0,
     modifier_groups: []
   };
-  listOfData: IFoodItem[] = RestaurantsMockData[0].restaurant_categories[0].food_items;
+
+
+  options = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly'];
+
+  handleCategoryChange(e: number): void {
+
+  }
 
   showFoodDetails(data: IFoodItem): void {
     this.showDetails = true;

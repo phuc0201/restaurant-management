@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SystemConstant } from '../constants/system.constant';
+import { URLConstant } from '../constants/url.constant';
 import { ILoginDTO } from '../models/auth/account.model';
 import { IToken } from '../models/common/response-data.model';
 
@@ -16,7 +17,7 @@ export class AuthService {
   ) { }
 
   doLogin(accCred: ILoginDTO): Observable<IToken> {
-    return this.http.post<IToken>(this.baseURL + '/auth/signin', accCred);
+    return this.http.post<IToken>(this.baseURL + URLConstant.API.AUTH.SIGNIN, accCred);
   }
 
   doLogout(): void {

@@ -1,0 +1,47 @@
+name: Trigger auto deployment for gop-merchant
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ master ]
+    paths:
+    - '**'
+    - '.github/workflows/gop-merchant-AutoDeployTrigger-af0b0acf-07b6-4423-af4e-505acc0d4c1d.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.GOPMERCHANT_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.GOPMERCHANT_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.GOPMERCHANT_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: gopservice.azurecr.io
+          registryUsername: ${{ secrets.GOPMERCHANT_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.GOPMERCHANT_REGISTRY_PASSWORD }}
+          containerAppName: gop-merchant
+          resourceGroup: gop-gateway
+          imageToBuild: gopservice.azurecr.io/gop-merchant:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+

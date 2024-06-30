@@ -24,15 +24,19 @@ export class AuthService {
     console.log('log out');
   }
 
+  isLogged(): boolean {
+    return this.getToken() != null;
+  }
+
   setToken(token: IToken): void {
     localStorage.setItem(
-      SystemConstant.CURRENT_INFO,
+      SystemConstant.CURRENT_MERCHANT,
       JSON.stringify(token),
     );
   }
 
   getToken(): IToken | null {
-    const tmp = localStorage.getItem(SystemConstant.CURRENT_INFO);
+    const tmp = localStorage.getItem(SystemConstant.CURRENT_MERCHANT);
     return tmp ? JSON.parse(tmp) : null;
   }
 

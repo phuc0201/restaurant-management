@@ -4,4 +4,13 @@
 
 .restaurant-categories .ant-segmented {
   margin-bottom: 10px;
+  @apply rounded-md;
+}
+
+::ng-deep .restaurant-categories .ant-segmented-item-selected {
+  @apply bg-primary text-white select-none rounded-md;
+}
+
+::ng-deep .restaurant-categories .ant-segmented-item-label {
+  @apply select-none min-w-28;
 }

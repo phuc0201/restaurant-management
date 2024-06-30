@@ -1,5 +1,19 @@
-<p class="text-black">dashboard works!</p>
-<p>
-  {{ token.accessToken }}
-</p>
-<a href="/restaurant/food-details">click here</a>
+<app-list-total-value-card></app-list-total-value-card>
+<div nz-row nzGutter="20">
+  <div nz-col nzSpan="16">
+    <app-spline-chart></app-spline-chart>
+  </div>
+
+  <div nz-col nzSpan="8">
+    <app-circle-chart></app-circle-chart>
+  </div>
+</div>
+
+<div nz-row nzGutter="20" class="mt-5 pb-5">
+  <div nz-col nzSpan="16">
+    <app-map></app-map>
+  </div>
+  <div nz-col nzSpan="8">
+    <app-top-products></app-top-products>
+  </div>
+</div>

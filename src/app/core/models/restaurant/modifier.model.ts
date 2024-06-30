@@ -1,10 +1,11 @@
-export interface IModifier {
-  id: string,
-  name: string,
-  price: number;
+export class Modifier {
+  _id: string = '';
+  name: string = '';
+  price: number = 0;
 }
 
-export interface IModifierDTO {
-  name: string;
-  price: number;
+export class ModifierDTO {
+  _id?: string;
+  name: string = '';
+  price: number = 0;
 }

@@ -1,50 +1,27 @@
-import { IFoodItem } from "../../models/restaurant/food_item.model";
-import { IRestaurant } from "../../models/restaurant/restaurant.model";
+import { FoodItems } from "../../models/restaurant/food-items.model";
+import { ModifierGroups } from "../../models/restaurant/modifier-groups.model";
+import { Restaurant } from "../../models/restaurant/restaurant.model";
 
 export interface RestaurantState {
-  info: IRestaurant;
+  info: Restaurant;
   error: string;
   loading: boolean;
 }
 
 export interface FoodItemState {
-  foodItem: IFoodItem;
+  foodItem: FoodItems<ModifierGroups>;
   error: string;
   loading: boolean;
 }
 
 export const initialResState: RestaurantState = {
-  info: {
-    id: '',
-    name: '',
-    cuisine_categories: [],
-    restaurant_categories: [],
-    profile: '',
-    status: '',
-    bio: '',
-    location: {
-      type: '',
-      coordinates: []
-    },
-    address: '',
-    cover_image: '',
-    avatar: '',
-    tier: '',
-    review: ''
-  },
+  info: new Restaurant(),
   error: '',
   loading: false
 };
 
 export const initialFoodItemState: FoodItemState = {
-  foodItem: {
-    id: '',
-    name: "",
-    bio: "",
-    price: 0,
-    modifier_groups: [],
-    image: ""
-  },
+  foodItem: new FoodItems<ModifierGroups>(),
   error: '',
   loading: false
 };

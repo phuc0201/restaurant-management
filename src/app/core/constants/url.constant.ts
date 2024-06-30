@@ -7,8 +7,16 @@ export const URLConstant = {
       SIGNIN: '/auth/restaurant/signin'
     },
     RESTAURANT: {
-      PROFILE: '/restaurant/info',
-      CREATE_FOOD_ITEM: '/restaurant/fooditem'
+      INFO: '/restaurant/info',
+      CREATE_FOOD_ITEM: '/restaurant/fooditem/create',
+      MENU: '/restaurant/menu',
+      GET_FOOD_DETAILS: '/restaurant/fooditem/',
+      CATEGORY: {
+        BASE: '/restaurant/category',
+        GET_LIST: '/restaurant/category',
+        CREATE: '/restaurant/category/create',
+        UPDATE: '/update'
+      },
     }
   }
 };

@@ -2,7 +2,7 @@ export class SystemConstant {
   public static REVISON = '230329.1';
   public static WEB_NAME = 'hcmute-portal-fe';
 
-  public static CURRENT_INFO = 'CURRENT_INFO';
+  public static CURRENT_MERCHANT = 'CURRENT_MERCHANT';
   public static CURRENT_INFO_GOOGLE = 'CURRENT_INFO_GOOGLE';
 
   public static ACTION = {
@@ -82,7 +82,7 @@ export class SystemConstant {
       uploadUrl: 'http://aaa.aaa',
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem(SystemConstant.CURRENT_INFO) ?? '{}')?.token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem(SystemConstant.CURRENT_MERCHANT) ?? '{}')?.token}`,
       },
     },
     mediaEmbed: {

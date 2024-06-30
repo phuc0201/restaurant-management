@@ -7,7 +7,7 @@
       </button>
     </a>
   </div>
-  <div class="flex justify-between items-center gap-5 ">
+  <div class="flex justify-between items-center gap-3">
     <div>
       <input type="text" placeholder="Type the dish name"
         class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
@@ -21,45 +21,58 @@
 
       <span>Bộ lọc</span>
     </button>
+
+    <button (click)="loadMenu()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
+      <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+    </button>
   </div>
 </div>
 
-<div class="text-start restaurant-categories">
-  <nz-segmented [nzOptions]="options" (nzValueChange)="handleCategoryChange($event)"></nz-segmented>
+<div class="text-start restaurant-categories h-[50px]">
+  <nz-segmented nzSize="large" [nzOptions]="options" (nzValueChange)="handleCategoryChange($event)"></nz-segmented>
 </div>
-<div class="px-5 pt-5 pb-16 border border-gray-200 rounded-md">
-  <!-- <nz-table #menuTable [nzData]="listOfData" nzFrontPagination="false" [nzScroll]="{ y: '700px' }" class="h-full">
+<div class="px-5 pt-5 border border-gray-200 rounded-md">
+  <nz-table #menuTable [nzData]="menu.length > 0 ? getFoodItemsByCategory : []" nzFrontPagination="true"
+    [nzScroll]="{ y: '500px' }" class="h-full">
     <thead>
       <tr>
-        <th>Ảnh</th>
-        <th>Tên món</th>
-        <th>Mô tả</th>
-        <th>Giá</th>
+        <th nzWidth="200px">Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Created at</th>
+        <th>Updated at</th>
         <th [nzRight]="true" nzWidth="150px">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of menuTable.data">
+      <tr *ngFor="let data of menuTable.data; let index = index">
         <td>
-          <img [src]="data.image" class="w-20 h-20 object-cover rounded-lg">
+          <div class="w-20 h-20 rounded-md bg-gray-200 flex justify-center items-center">
+            <img *ngIf="data.image !== ''" [src]="data.image" class="w-20 h-20 object-cover rounded-lg">
+            <i *ngIf="data.image == ''" class="fa-solid fa-image text-2xl text-gray-50"></i>
+          </div>
         </td>
         <td>{{ data.name }}</td>
         <td>{{ data.bio }}</td>
-        <td>{{ data.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'}) }}</td>
+        <td>{{ data.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" }) }}</td>
+        <td>{{ formatDate(data.createdAt) }}</td>
+        <td>{{ formatDate(data.updatedAt) }}</td>
         <td [nzRight]="true">
           <div class="flex items-center m-auto gap-1">
-            <a [routerLink]="['food-details', data.id]">
+            <a [routerLink]="['category', data.category_id, 'food-details', data._id]">
               <button class="w-10 h-10 text-center bg-primary rounded-md text-white flex">
                 <i class="fa-regular fa-eye m-auto"></i>
               </button>
             </a>
-            <button class="w-10 h-10 text-center bg-red rounded-md text-white flex">
-              <i class="fa-solid fa-xmark m-auto"></i>
+            <button (click)="deleteFoodItem(data._id, data.category_id!)"
+              class="w-10 h-10 text-center bg-red rounded-md text-white flex">
+              <i class="fa-regular fa-trash-can m-auto"></i>
             </button>
           </div>
         </td>
       </tr>
     </tbody>
-  </nz-table> -->
-  <app-panigation [pageNumber]="20"></app-panigation>
+  </nz-table>
+  <!-- <app-panigation *ngIf="menu.length > 0" [pageNumber]="20"></app-panigation> -->
 </div>

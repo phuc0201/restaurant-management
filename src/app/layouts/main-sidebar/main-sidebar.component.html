@@ -5,22 +5,28 @@
       Dashboard
     </span>
   </a>
+  <a [routerLink]="['/category']" routerLinkActive="sidebar-item-active">
+    <span>
+      <i class="fa-solid fa-layer-group mr-3 text-lg"></i>
+      Categogry
+    </span>
+  </a>
   <a [routerLink]="['/restaurant']" routerLinkActive="sidebar-item-active">
     <span>
       <i class="fa-solid fa-shop mr-3 text-lg"></i>
-      Nhà hàng
+      Menu
     </span>
   </a>
   <a [routerLink]="['/order-history']" routerLinkActive="sidebar-item-active">
     <span>
       <i class="fa-brands fa-shopify mr-3 text-lg"></i>
-      Đơn hàng
+      Order
     </span>
   </a>
-  <a [routerLink]="['/pending-orders']" routerLinkActive="sidebar-item-active">
+  <a [routerLink]="['/campaign']" routerLinkActive="sidebar-item-active">
     <span>
-      <i class="fa-solid fa-clock-rotate-left mr-3 text-lg"></i>
-      Đơn đang chờ
+      <i class="fa-solid fa-percent mr-3 text-lg"></i>
+      Campaign
     </span>
   </a>
 </div>

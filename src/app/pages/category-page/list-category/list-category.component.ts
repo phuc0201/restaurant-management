@@ -1,0 +1,102 @@
+import { Component, OnInit } from '@angular/core';
+import { RestaurantCategory, RestaurantCategoryDTO } from 'src/app/core/models/restaurant/restaurant-category.model';
+import { FormatService } from 'src/app/core/services/common/format.serive';
+import { RestaurantService } from 'src/app/core/services/restaurant.service';
+
+@Component({
+  selector: 'app-list-category',
+  templateUrl: './list-category.component.html',
+  styleUrls: ['./list-category.component.scss']
+})
+export class ListCategoryComponent implements OnInit {
+  options: string[] = [];
+  categories: RestaurantCategory<string>[] = [];
+  isVisibleCreateModal: boolean = false;
+  cateDTO = new RestaurantCategoryDTO();
+  isUpdate: boolean = false;
+  isLoading: boolean = false;
+  isDeleting: boolean = false;
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  formatDate(isoDate: string): string {
+    return this.formatSrv.formatDate(isoDate);
+  }
+
+  loadCategories() {
+    this.isLoading = true;
+    this.resSrv.getCategories()
+      .subscribe({
+        next: data => {
+          this.categories = data;
+        },
+        complete: () => {
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 800);
+        }
+      });
+  }
+
+  deleteCategory(id: string) {
+    this.resSrv.deleteCategory(id).subscribe({
+      complete: () => {
+        this.loadCategories();
+      }
+    });
+  }
+
+  updateCategory(): void {
+    this.resSrv.updateCategory(this.cateDTO).subscribe({
+      complete: () => {
+        this.loadCategories();
+        this.isVisibleCreateModal = false;
+        this.isUpdate = false;
+      }
+    });
+  }
+
+  createCategory(): void {
+    this.resSrv.createCategory(this.cateDTO).subscribe({
+      complete: () => {
+        this.loadCategories();
+      }
+    });
+  }
+
+  showModal() {
+    this.cateDTO = new RestaurantCategoryDTO();
+    this.isVisibleCreateModal = true;
+  }
+
+  handleUpdateCategory(cate: RestaurantCategory<string>) {
+    this.isUpdate = true;
+    this.isVisibleCreateModal = true;
+    this.cateDTO = cate;
+  }
+
+  handleCreateCategory(): void {
+    this.isVisibleCreateModal = false;
+    this.createCategory();
+  }
+
+  handleOke(): void {
+    this.isLoading = true;
+    if (!this.isUpdate) {
+      this.handleCreateCategory();
+    } else {
+      this.updateCategory();
+    }
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisibleCreateModal = false;
+  }
+
+  constructor(
+    private resSrv: RestaurantService,
+    private formatSrv: FormatService
+  ) { }
+}

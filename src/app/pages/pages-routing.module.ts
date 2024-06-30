@@ -27,18 +27,27 @@ const routes: Routes = [
         },
       },
       {
-        path: 'pending-orders',
-        loadChildren: () => import('./pending-orders-page/pending-orders-page.module').then(m => m.PendingOrdersPageModule),
-        data: {
-          breadcrumb: 'PendingOrder'
-        },
-      },
-      {
         path: 'restaurant',
         loadChildren: () => import('./restaurant-page/restaurant-page.module').then(m => m.RestaurantPageModule),
         title: 'Restaurant',
         data: {
           breadcrumb: 'Restaurant'
+        },
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('./category-page/category-page.module').then(m => m.CategoryPageModule),
+        title: 'Category',
+        data: {
+          breadcrumb: 'Category'
+        },
+      },
+      {
+        path: 'campaign',
+        loadChildren: () => import('./campaign-page/campaign-page.module').then(m => m.CampaignPageModule),
+        title: 'Campaign',
+        data: {
+          breadcrumb: 'Campaign'
         },
       }
     ]

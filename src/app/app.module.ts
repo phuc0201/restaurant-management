@@ -17,6 +17,9 @@ registerLocaleData(en);
 
 /** config ng-zorro-antd i18n **/
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
+
+import { ProgressInterceptor } from './core/interceptors/progress.interceptor';
+import { ProgressBarComponent } from './shared/component-shared/loader/progress-bar/progress-bar.component';
 const config: SocketIoConfig = { url: '', options: {} };
 
 const ngZorroConfig: NzConfig = {
@@ -26,7 +29,7 @@ const ngZorroConfig: NzConfig = {
 };
 
 const plugins = [
-
+  ProgressBarComponent
 ];
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ const plugins = [
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
+    plugins,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     CoreModule,
     SocketIoModule.forRoot(config),
@@ -47,6 +51,11 @@ const plugins = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProgressInterceptor,
       multi: true
     },
     provideNzI18n(en_US)

@@ -1,10 +1,10 @@
 <div nz-row class="items-center justify-between p-5 border border-gray-200 shadow-sm rounded-lg mb-5">
   <h1 class="m-0 font-medium">Thông tin chi tiết</h1>
-  <button class="px-3 py-2 bg-primary text-white font-medium rounded-md">
+  <button (click)="updateFoodItem()" class="px-3 py-2 bg-primary text-white font-medium rounded-md">
     Update now
   </button>
 </div>
-<app-form-food-details></app-form-food-details>
+<app-form-food-details [(foodItemDTO)]="foodItemDTO"></app-form-food-details>
 
 <!-- LAYOUT -->
 <!-- <nz-modal [(nzVisible)]="openModal" nzWrapClassName="food-details-wrapper" [nzTitle]="foodDetails.name" nzWidth="60%"

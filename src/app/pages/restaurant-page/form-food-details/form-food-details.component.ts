@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CreateFoodItemDTO } from 'src/app/core/models/restaurant/food_item.model';
-import { IModifierGroupsDTO } from 'src/app/core/models/restaurant/modifier-groups.mode';
-import { IModifierDTO } from 'src/app/core/models/restaurant/modifier.model';
+import { CreateFoodItemDTO } from 'src/app/core/models/restaurant/food-items.model';
+import { ModifierGroupsDTO } from 'src/app/core/models/restaurant/modifier-groups.model';
+import { Modifier, ModifierDTO } from 'src/app/core/models/restaurant/modifier.model';
+import { RestaurantCategory } from 'src/app/core/models/restaurant/restaurant-category.model';
+import { RestaurantService } from 'src/app/core/services/restaurant.service';
 
 @Component({
   selector: 'app-form-food-details',
@@ -10,65 +12,65 @@ import { IModifierDTO } from 'src/app/core/models/restaurant/modifier.model';
   styleUrls: ['./form-food-details.component.scss']
 })
 export class FormFoodDetailsComponent implements OnInit, OnChanges {
-  @Input() foodDetails: CreateFoodItemDTO = {
-    category_id: '',
-    name: '',
-    price: 0,
-    bio: '',
-    modifier_groups: []
-  };
-  @Output() foodDetailsChange = new EventEmitter<CreateFoodItemDTO>();
-  modifierGroup: IModifierGroupsDTO = {
-    name: '',
-    min: 0,
-    max: 1,
-    modifier: []
-  };
+  @Input() foodItemDTO = new CreateFoodItemDTO();
+  @Output() foodItemDTOChange = new EventEmitter<CreateFoodItemDTO>();
+  @Input() isUpdateFoodItem: boolean = false;
   quantityModifiers: number = 0;
+  categories: RestaurantCategory<string>[] = [];
+  categorySelected: string = '';
+  indexModifierGrpSelected: number = -1;
+  modifierGroupForm = new ModifierGroupsDTO();
   foodBio?: string;
   loading = false;
-  foodImage?: string;
+  foodImage: string = '';
   form!: FormGroup;
   formModifier!: FormGroup;
   listOfControl: Array<{ id: number; controlInstance: string; }> = [];
   isVisibleModifierGrs = false;
-  constructor() { }
+  isUpdateMdGrp: boolean = false;
 
   showModal(): void {
-    this.quantityModifiers = 0;
     this.isVisibleModifierGrs = true;
   }
 
-  resetModifierGrpModal(): void {
-    this.modifierGroup = {
-      name: '',
-      min: 0,
-      max: 1,
-      modifier: []
-    };;
+  updateModifierGrp(index: number) {
+    this.indexModifierGrpSelected = index;
+    this.isUpdateMdGrp = true;
+    this.modifierGroupForm = { ...this.foodItemDTO.modifier_groups[index] };
+    this.showModal();
   }
 
-  handleCreateModifiler(): void {
-    if (this.modifierGroup.min >= 0
-      && this.modifierGroup.max > 0
-      && this.modifierGroup.name.trim() != ''
+  handleSaveModifierGroup(): void {
+    if (this.isUpdateMdGrp) {
+      this.foodItemDTO.modifier_groups[this.indexModifierGrpSelected] = this.modifierGroupForm;
+    }
+    else if (this.modifierGroupForm.min >= 0
+      && this.modifierGroupForm.max > 0
+      && this.modifierGroupForm.name.trim() != ''
       && this.quantityModifiers > 0) {
       for (let i = 0; i < this.quantityModifiers; i++) {
         let modifier = {
           name: '',
           price: 0
-        } as IModifierDTO;
-        this.modifierGroup.modifier.push(modifier);
+        } as Modifier;
+        this.modifierGroupForm.modifier.push(modifier);
       }
-      this.foodDetails.modifier_groups.push(this.modifierGroup);
-      this.isVisibleModifierGrs = false;
-      this.resetModifierGrpModal();
+      this.foodItemDTO.modifier_groups.push(this.modifierGroupForm);
     }
+    this.handleClose();
   }
 
-  handleCancel(): void {
+  handleClose(): void {
     this.isVisibleModifierGrs = false;
-    this.resetModifierGrpModal();
+    this.isUpdateMdGrp = false;
+    this.indexModifierGrpSelected = -1;
+    this.quantityModifiers = 0;
+    this.modifierGroupForm = new ModifierGroupsDTO();
+  }
+
+  addModifier(modifierGr: ModifierGroupsDTO) {
+    const modifier = new ModifierDTO();
+    modifierGr.modifier.push(modifier);
   }
 
   uploadImage(event: any): void {
@@ -78,27 +80,35 @@ export class FormFoodDetailsComponent implements OnInit, OnChanges {
       this.foodImage = e.target.result as string;
     };
     reader.readAsDataURL(file);
-    this.foodDetails.image = file;
+    this.foodItemDTO.image = file;
   }
 
   removeModifier(mdIndex: number, mgrIndex: number): void {
-    this.quantityModifiers--;
-    if (this.quantityModifiers <= 0) {
-      this.foodDetails.modifier_groups.splice(mgrIndex, 1);
+    if (this.foodItemDTO.modifier_groups[mgrIndex].modifier.length <= 1) {
+      this.foodItemDTO.modifier_groups.splice(mgrIndex, 1);
     } else {
-      this.foodDetails.modifier_groups[mgrIndex].modifier.splice(mdIndex, 1);
+      this.foodItemDTO.modifier_groups[mgrIndex].modifier.splice(mdIndex, 1);
     }
   }
 
   removeModifierGroup(index: number): void {
-    this.foodDetails.modifier_groups.splice(index, 1);
+    this.foodItemDTO.modifier_groups.splice(index, 1);
   }
 
   ngOnInit(): void {
-
+    this.resSrv.getCategories().subscribe(data => {
+      this.categories = data;
+      if (this.foodItemDTO.category_id === '') {
+        this.foodItemDTO.category_id = data[0]._id;
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
   }
+
+  constructor(
+    private resSrv: RestaurantService,
+  ) { }
 }

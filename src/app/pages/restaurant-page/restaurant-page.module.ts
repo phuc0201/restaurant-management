@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -20,15 +21,16 @@ import { CreateFoodItemComponent } from './create-food-item/create-food-item.com
 import { FoodItemDetailsComponent } from './food-item-details/food-item-details.component';
 import { FormFoodDetailsComponent } from './form-food-details/form-food-details.component';
 import { ListRestaurantFoodItemComponent } from './list-restaurant-food-item/list-restaurant-food-item.component';
-import { RestaurantContentComponent } from './restaurant-content/restaurant-content.component';
+
+
 const routes: Routes = [
   {
     path: '',
-    component: RestaurantContentComponent,
+    component: ListRestaurantFoodItemComponent,
     title: 'Restaurant'
   },
   {
-    path: 'food-details/:id',
+    path: 'category/:cateID/food-details/:id',
     component: FoodItemDetailsComponent,
     title: 'Restaurant',
     data: {
@@ -47,15 +49,15 @@ const routes: Routes = [
 
 const plugins = [
   PanigationComponent,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  NzEmptyModule
 ];
 @NgModule({
   declarations: [
     ListRestaurantFoodItemComponent,
     FoodItemDetailsComponent,
-    RestaurantContentComponent,
     FormFoodDetailsComponent,
-    CreateFoodItemComponent,
+    CreateFoodItemComponent
   ],
   imports: [
     CommonModule,

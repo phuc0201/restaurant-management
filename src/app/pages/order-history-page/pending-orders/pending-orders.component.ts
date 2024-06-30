@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pending-orders.component.scss']
 })
 export class PendingOrdersComponent implements OnInit {
-  listPendingOrders: number[] = [];
+  listPendingOrders: number[] = [1,2,3];
 
-  constructor(
-  ) { }
   ngOnInit(): void {
 
   }
+
+  constructor(
+  ) { }
 }

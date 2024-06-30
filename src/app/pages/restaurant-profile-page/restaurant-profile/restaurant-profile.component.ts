@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IRestaurant } from 'src/app/core/models/restaurant/restaurant.model';
+import { Restaurant } from 'src/app/core/models/restaurant/restaurant.model';
 import { getInfor } from 'src/app/core/store/restaurant/restaurant.actions';
 import { selectInfoSelector } from 'src/app/core/store/restaurant/restaurant.selector';
 import { RestaurantState } from 'src/app/core/store/restaurant/restaurant.state';
@@ -11,7 +11,7 @@ import { RestaurantState } from 'src/app/core/store/restaurant/restaurant.state'
   styleUrls: ['./restaurant-profile.component.scss']
 })
 export class RestaurantProfileComponent implements OnInit {
-  restaurantInfo?: IRestaurant;
+  restaurantInfo = new Restaurant();
   constructor(
     private store: Store<RestaurantState>
   ) { }

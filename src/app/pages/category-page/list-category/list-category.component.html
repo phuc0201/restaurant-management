@@ -1,0 +1,76 @@
+<div class="w-full flex items-center justify-between mb-5">
+  <div>
+    <button (click)="showModal()" class="bg-primary px-3 rounded-md text-white font-medium h-10">
+      Add category
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+  <div class="flex justify-between items-center gap-3 ">
+    <div>
+      <input type="text" placeholder="Type the category name"
+        class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+    </div>
+
+    <button (click)="loadCategories()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
+      <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+    </button>
+  </div>
+</div>
+
+<div class="px-5 pt-5 pb-16 border border-gray-200 rounded-md">
+  <nz-table #menuTable [nzData]="categories" nzFrontPagination="false" [nzScroll]="{ y: '500px' }" class="h-full">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Total food</th>
+        <th>Created at</th>
+        <th>Updated at</th>
+        <th [nzRight]="true" nzWidth="150px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of menuTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.bio }}</td>
+        <td>{{ data.food_items.length }}</td>
+        <td>{{ formatDate(data.createdAt) }}</td>
+        <td>{{ formatDate(data.updatedAt) }}</td>
+        <td [nzRight]="true">
+          <div class="flex items-center justify-center m-auto gap-1">
+            <button (click)="handleUpdateCategory(data)"
+              class="w-10 h-10 text-center bg-primary rounded-md text-white flex">
+              <i class="fa-solid fa-pen-nib m-auto"></i>
+            </button>
+            <button (click)="deleteCategory(data._id)" class="w-10 h-10 text-center bg-red rounded-md text-white flex">
+              <i class="fa-regular fa-trash-can m-auto"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-panigation [pageNumber]="categories.length"></app-panigation>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisibleCreateModal" nzWrapClassName="form-create-category" nzTitle="Create category"
+  (nzOnCancel)="handleCancel()" (nzOnOk)="handleOke()" [nzOkLoading]="isLoading">
+  <ng-container *nzModalContent>
+    <label>
+      <span class="text-red1">*</span>
+      Name:
+    </label>
+    <input [(ngModel)]="cateDTO.name" type="text" placeholder=""
+      class="w-full hover:border-primary bg-gray-50 border-[0.1px] border-gray-300 rounded-lg !h-10 focus:ring-green2 focus:ring-2  focus:border-primary">
+
+    <div class="my-3"></div>
+
+    <label>
+      <span class="text-red1">*</span>
+      Description:
+    </label>
+    <input [(ngModel)]="cateDTO.bio" type="text" placeholder=""
+      class="w-full hover:border-primary bg-gray-50 border-[0.1px] border-gray-300 rounded-lg !h-10 focus:ring-green2 focus:ring-2  focus:border-primary">
+  </ng-container>
+</nz-modal>

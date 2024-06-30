@@ -1,0 +1,18 @@
+<div class="bg-white border border-gray-200 mb-5 rounded-lg">
+  <div class="p-5 flex flex-col items-start">
+
+    <div class="flex justify-between w-full">
+      <span class="font-medium text-xl text-gray-700"> {{ title }} </span>
+      <div class="w-14 h-14 bg-green4 text-primary flex justify-center items-center rounded-md text-xl">
+        <i *ngIf="title == 'Orders'" class="fa-solid fa-cart-plus"></i>
+        <i *ngIf="title == 'Reviews'" class="fa-solid fa-star"></i>
+        <i *ngIf="title == 'Total revenue'" class="fa-solid fa-hand-holding-dollar"></i>
+        <i *ngIf="title == 'Products'" class="fa-solid fa-arrow-trend-up"></i>
+      </div>
+    </div>
+
+    <div class="font-medium text-gray-600 mt-14">
+      {{ title !== 'Total revenue' ? value : value.toLocaleString("vi-VN", { style: "currency", currency: "VND" }) }}
+    </div>
+  </div>
+</div>

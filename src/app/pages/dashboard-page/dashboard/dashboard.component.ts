@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IToken } from 'src/app/core/models/common/response-data.model';
-import { selectToken } from 'src/app/core/store/auth/auth.reducer';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +13,6 @@ export class DashboardComponent implements OnInit {
     private store: Store
   ) { }
   ngOnInit(): void {
-    this.store.select(selectToken).subscribe((token) => {
-      this.token = token;
-    });
+
   }
 }

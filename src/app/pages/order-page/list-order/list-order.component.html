@@ -1,0 +1,5 @@
+<div nz-row nzGutter="20">
+  <div *ngFor="let item of listPendingOrders" nz-col nzSpan="24" class="mb-5">
+    <app-order-card [orderTypeIsPending]="orderTypeIsPending"></app-order-card>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+::ng-deep .modal-campaign .ant-modal-content {
+  @apply overflow-hidden rounded-lg;
+}
+
+::ng-deep .modal-campaign .ant-modal {
+  @apply top-10;
+}
+
+.form-campaign .form-control {
+  @apply flex flex-col;
+}
+
+.form-campaign .form-control input {
+  @apply w-full hover:border-primary bg-gray-50 border-[0.1px] border-gray-300 rounded-lg h-10 focus:ring-green2 focus:ring-2  focus:border-primary;
+}
+
+::ng-deep .form-campaign br {
+  @apply hidden;
+}
+
+::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  @apply rounded-md overflow-hidden;
+}

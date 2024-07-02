@@ -20,10 +20,10 @@ const routes: Routes = [
         },
       },
       {
-        path: 'order-history',
-        loadChildren: () => import('./order-history-page/order-history-page.module').then(m => m.OrderHistoryPageModule),
+        path: 'order',
+        loadChildren: () => import('./order-page/order-page.module').then(m => m.OrderPageModule),
         data: {
-          breadcrumb: 'Order history'
+          breadcrumb: 'Order'
         },
       },
       {

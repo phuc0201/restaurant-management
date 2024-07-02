@@ -1,0 +1,22 @@
+<div class="flex justify-end gap-5">
+  <div>
+    <input type="text" placeholder="Type the customer's name"
+      class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+  </div>
+
+  <button (click)="loadOrders()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
+    <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+  </button>
+</div>
+
+<nz-tabset [nzSelectedIndex]="tabIndexSelected" nzSize="large">
+  <nz-tab nzTitle="Pending Orders">
+    <app-list-order [orderTypeIsPending]="true"></app-list-order>
+  </nz-tab>
+  <nz-tab nzTitle="Active Orders">
+    <app-list-order [orderTypeIsPending]="false"></app-list-order>
+  </nz-tab>
+  <nz-tab nzTitle="Order History">
+    <app-order-history></app-order-history>
+  </nz-tab>
+</nz-tabset>

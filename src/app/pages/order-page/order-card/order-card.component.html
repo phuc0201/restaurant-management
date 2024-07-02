@@ -1,0 +1,63 @@
+<div class="pending-order-card border-y-0 border-r-0 border-primary border-2 rounded-t-lg overflow-hidden">
+  <div class="flex items-center justify-between p-5 bg-gray-100">
+    <nz-tag [nzColor]="'blue'" class="uppercase">trịnh hoàng phúc</nz-tag>
+    <span class="text-blue2">Expected delivery by 25-4-2024 12:00 PM</span>
+  </div>
+  <!--  -->
+  <div class="p-5 flex items-start justify-between">
+    <ng-container>
+      <div class="flex flex-col flex-1">
+        <ng-container *ngFor="let item of [1,4]">
+          <div class="flex mb-5">
+            <img src="assets/img/foods/food-default.webp" class="w-24 h-24 aspect-square object-cover rounded-md mt-2">
+
+            <div class="h-full flex-1 px-10">
+              <ng-container *ngFor="let item of [1,2,3,4]; let last = last; let i = index;">
+                <div>
+                  <div class="flex items-center justify-between border-x-0 border-t-0 border-gray-200 py-2 w-full"
+                    [ngClass]="last ? 'border-none': 'border'">
+                    <span>Modifier {{i}}: </span>
+                    <span>200.000 đ</span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div class="order-summary-card flex flex-col items-start gap-2 w-[30%]">
+      <div class="flex items-center justify-between border border-x-0 border-t-0 border-gray-200 py-2 w-full">
+        <span class="font-bold">Subtotal: </span>
+        <span>200.000 đ</span>
+      </div>
+      <div class="py-2 flex items-center justify-between w-full">
+        <span class="font-bold">Delivery fee: </span>
+        <span>0 đ</span>
+      </div>
+      <br />
+      <div class="py-2 flex items-center justify-between w-full">
+        <span class="font-bold">Total:</span>
+        <span>200.000 đ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-fit float-end p-5">
+    <div class="flex items-center gap-2">
+      <button *ngIf="orderTypeIsPending" class="px-3 py-2 rounded-md bg-blue2 text-white font-medium">
+        Accept
+      </button>
+
+      <button *ngIf="!orderTypeIsPending" class="px-3 py-2 rounded-md bg-yellow-300 text-white font-medium">
+        Processing
+      </button>
+
+      <button class="px-3 py-2 rounded-md bg-red text-white font-medium">
+        Reject
+      </button>
+    </div>
+  </div>
+
+</div>

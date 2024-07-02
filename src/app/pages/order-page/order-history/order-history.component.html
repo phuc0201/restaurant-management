@@ -1,0 +1,39 @@
+<div class="px-5 pt-5 border border-gray-200 rounded-md">
+  <nz-table #menuTable [nzData]="[]" nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
+    <thead>
+      <tr>
+        <th nzWidth="200px">Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Limit</th>
+        <th>Type</th>
+        <th [nzRight]="true" nzWidth="150px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of menuTable.data; let index = index">
+        <td>
+          <div class="w-20 h-20 rounded-md bg-gray-200 flex justify-center items-center">
+            <img [src]="" class="w-20 h-20 object-cover rounded-lg">
+            <i class="fa-solid fa-image text-2xl text-gray-50"></i>
+          </div>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td [nzRight]="true">
+          <div class="flex items-center m-auto gap-1">
+            <button class="w-10 h-10 text-center bg-primary rounded-md text-white flex">
+              <i class="fa-regular fa-eye m-auto"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

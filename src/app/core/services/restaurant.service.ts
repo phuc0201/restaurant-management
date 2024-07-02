@@ -67,6 +67,4 @@ export class RestaurantService {
   deleteCategory(id: string): Observable<RestaurantCategory<string>> {
     return this.http.delete<RestaurantCategory<string>>(this.baseURL + `/restaurant/category/${id}/delete`);
   }
-
-
 }

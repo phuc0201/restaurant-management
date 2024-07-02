@@ -16,9 +16,7 @@ export class FoodItemDetailsComponent implements OnInit {
 
   updateFoodItem() {
     this.foodItemDTO._id = this.foodDetails._id;
-    const { category_id, ...dto } = this.foodItemDTO;
-    // console.log(dto);
-    this.resSrv.updateFoodItem(dto).subscribe();
+    this.resSrv.updateFoodItem(this.foodItemDTO).subscribe();
   }
 
   ngOnInit(): void {
@@ -33,10 +31,25 @@ export class FoodItemDetailsComponent implements OnInit {
         this.foodDetails = data;
         this.foodItemDTO.bio = data.bio;
         this.foodItemDTO.image = data.image;
-        this.foodItemDTO.modifier_groups = data.modifier_groups;
         this.foodItemDTO.price = data.price;
         this.foodItemDTO.name = data.name;
         this.foodItemDTO.category_id = this.categorySelected;
+        this.foodItemDTO.modifier_groups = data.modifier_groups.map(group => {
+          const newModifier = group.modifier.map(md => {
+            return {
+              _id: md._id,
+              name: md.name,
+              price: md.price
+            };
+          });
+
+          return {
+            name: group.name,
+            min: group.min,
+            max: group.max,
+            modifier: newModifier
+          };
+        });
       });
     });
   }

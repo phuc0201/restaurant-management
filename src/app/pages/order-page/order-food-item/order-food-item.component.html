@@ -1,0 +1,31 @@
+<div class="flex gap-4 w-full">
+  <img [src]="foodItem.foodDetails.image" onerror="this.src='assets/img/foods/food-default.webp'"
+    class="w-16 h-16 aspect-square object-cover rounded-lg">
+
+  <div class="flex-1 flex justify-between">
+    <div class="flex flex-col items-start">
+      <div>
+        <span class="font-bold text-gray-700 uppercase">{{ foodItem.foodDetails.name }}</span>
+        <span class="font-normal text-gray-500 ml-1">x1</span>
+      </div>
+      <div class="flex flex-col items-start">
+        <span class="text-gray-400 font-light">
+          Base price: {{ foodItem.foodDetails.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" }) }}
+        </span>
+        <span *ngFor="let item of foodItem.modifiers" class="text-gray-400 font-light">{{ item.name }} + {{
+          item.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" }) }}</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-between items-end">
+      <a href="#"
+        class="text-primary font-bold hover:opacity-80 hover:text-primary hover:transition-shadow hover:shadow-lime-700 hover:drop-shadow-lg">View
+        food
+        details</a>
+      <span class="text-primary font-medium">
+        Total: <span class="text-gray-500 font-light">{{ calculateTotalPrice.toLocaleString("vi-VN", { style:
+          "currency", currency: "VND" }) }}</span>
+      </span>
+    </div>
+  </div>
+</div>

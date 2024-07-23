@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
   providedIn: 'root'
 })
 export class FormatService {
+
   formatDate(isoDate: string): string {
     const date = new Date(isoDate);
     const day = String(date.getDate()).padStart(2, '0');

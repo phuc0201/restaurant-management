@@ -1,0 +1,59 @@
+<div class="w-full flex items-center justify-between mb-5">
+  <div>
+
+  </div>
+  <div class="flex justify-between items-center gap-3 ">
+    <div>
+      <input [(ngModel)]="searchValue" (ngModelChange)="search($event)" type="text" placeholder="Type the user name"
+        class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+    </div>
+
+    <button (click)="loadAccount()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
+      <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="px-5 pt-5 border border-gray-200 rounded-md">
+  <nz-table #accountTable [nzData]="listOfAccountForSearch" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+    nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th nzWidth="200px">Avatar</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th [nzRight]="true" nzWidth="150px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of accountTable.data; let index = index">
+        <td [nzChecked]="setOfCheckedId.has(data._id)" (nzCheckedChange)="onItemChecked(data._id, $event)"></td>
+        <td>
+          <img [src]="data.avatar" onerror="this.src='assets/img/avatars/user.png'"
+            class="w-14 h-14 display-animation object-cover rounded-full">
+        </td>
+        <td>{{ data.full_name }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ data.gender ? 'male' : 'female' }}</td>
+        <td [nzRight]="true">
+          <div class="flex items-center m-auto gap-1">
+            <a [routerLink]="[data._id, 'details']"
+              class="w-10 h-10 text-center bg-primary rounded-md text-white hover:text-white flex">
+              <i class="fa-regular fa-eye m-auto"></i>
+            </a>
+            <button (click)="changeAccountStatus(data)" class="w-10 h-10 text-center bg-red rounded-md text-white flex">
+              <i class="fa-solid m-auto" [ngClass]="data.verified ? 'fa-lock-open' : 'fa-lock'"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

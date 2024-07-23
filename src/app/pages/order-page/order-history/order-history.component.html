@@ -1,36 +1,37 @@
 <div class="px-5 pt-5 border border-gray-200 rounded-md">
-  <nz-table #menuTable [nzData]="[]" nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
+  <nz-table #menuTable [nzData]="orders" nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
     <thead>
       <tr>
-        <th nzWidth="200px">Image</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Start time</th>
-        <th>End time</th>
-        <th>Limit</th>
-        <th>Type</th>
+        <th>Customer ID</th>
+        <th>Phone</th>
+        <th>Order time</th>
+        <th>Order status</th>
+        <th>Delivery address</th>
+        <th>Delivery fare</th>
         <th [nzRight]="true" nzWidth="150px">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of menuTable.data; let index = index">
+        <td>{{ data.customer }}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ formatDate(data.order_time) }}</td>
         <td>
-          <div class="w-20 h-20 rounded-md bg-gray-200 flex justify-center items-center">
-            <img [src]="" class="w-20 h-20 object-cover rounded-lg">
-            <i class="fa-solid fa-image text-2xl text-gray-50"></i>
-          </div>
+          <nz-tag [nzColor]="getTagColorForOrderStatus(data.order_status)">{{ data.order_status }}</nz-tag>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          {{ data.delivery_location.address }}
+        </td>
+        <td>{{ data.delivery_fare }}</td>
+        <!-- <td>
+          <nz-tag [nzColor]="getTagColorForPaymentMethod('VNPAY')">{{ data. }}</nz-tag>
+        </td> -->
         <td [nzRight]="true">
-          <div class="flex items-center m-auto gap-1">
-            <button class="w-10 h-10 text-center bg-primary rounded-md text-white flex">
+          <div class="flex items-center justify-center">
+            <a [routerLink]="['details', data._id]"
+              class="w-10 h-10 text-center hover:text-white bg-primary rounded-md text-white flex">
               <i class="fa-regular fa-eye m-auto"></i>
-            </button>
+            </a>
           </div>
         </td>
       </tr>

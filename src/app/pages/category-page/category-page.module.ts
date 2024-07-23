@@ -22,7 +22,7 @@ const routes: Routes = [
 const plugins = [
   PanigationComponent,
   BreadcrumbComponent,
-  NzEmptyModule
+  NzEmptyModule,
 ];
 
 @NgModule({

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from 'src/app/core/models/order/order.model';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-order',
@@ -6,16 +8,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  isLoading: boolean = true;
+  reload: boolean = true;
   tabIndexSelected: number = 2;
+  orders: Order<string>[] = [];
+
   loadOrders() {
-    this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 700);
+    this.reload = true;
+
+    this.orderService.getAllDeliveryOrder().subscribe({
+      next: data => {
+        this.orders = data;
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.reload = false;
+        }, 700);
+      }
+    });
+  }
+
+  reloadOrder(event: boolean) {
+    if (event) {
+      this.loadOrders();
+    }
+  }
+
+
+  searchOrderHistory() {
+
   }
 
   ngOnInit(): void {
     this.loadOrders();
   }
+
+  constructor(
+    private orderService: OrderService
+  ) { }
 }

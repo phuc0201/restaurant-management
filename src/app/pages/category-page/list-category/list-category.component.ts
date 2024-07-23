@@ -11,13 +11,24 @@ import { RestaurantService } from 'src/app/core/services/restaurant.service';
 export class ListCategoryComponent implements OnInit {
   options: string[] = [];
   categories: RestaurantCategory<string>[] = [];
+  categoriesForSearch: RestaurantCategory<string>[] = [];
   isVisibleCreateModal: boolean = false;
   cateDTO = new RestaurantCategoryDTO();
   isUpdate: boolean = false;
   isLoading: boolean = false;
   isDeleting: boolean = false;
-  ngOnInit(): void {
-    this.loadCategories();
+  cateImage: string = '';
+  fileImage: File = new File([], '');
+  searchValue: string = '';
+
+  normalizeString(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  search(name: string) {
+    setTimeout(() => {
+      this.categoriesForSearch = this.categories.filter(cate => this.normalizeString(cate.name.toLowerCase()).includes(this.normalizeString(name.toLowerCase())));
+    }, 1000);
   }
 
   formatDate(isoDate: string): string {
@@ -30,6 +41,7 @@ export class ListCategoryComponent implements OnInit {
       .subscribe({
         next: data => {
           this.categories = data;
+          this.categoriesForSearch = data;
         },
         complete: () => {
           setTimeout(() => {
@@ -49,6 +61,13 @@ export class ListCategoryComponent implements OnInit {
 
   updateCategory(): void {
     this.resSrv.updateCategory(this.cateDTO).subscribe({
+      next: (data) => {
+        if (this.fileImage.name !== '') {
+          const updateImage = this.resSrv.updateCateImg(data._id, this.fileImage).subscribe({
+            complete: () => { updateImage.unsubscribe(); }
+          });
+        }
+      },
       complete: () => {
         this.loadCategories();
         this.isVisibleCreateModal = false;
@@ -58,19 +77,38 @@ export class ListCategoryComponent implements OnInit {
   }
 
   createCategory(): void {
-    this.resSrv.createCategory(this.cateDTO).subscribe({
+    const cateObserve = this.resSrv.createCategory(this.cateDTO).subscribe({
+      next: data => {
+        const updateImage = this.resSrv.updateCateImg(data._id, this.fileImage).subscribe({
+          complete: () => { updateImage.unsubscribe(); }
+        });
+      },
       complete: () => {
         this.loadCategories();
+        cateObserve.unsubscribe();
       }
     });
+  }
+
+  uploadImage(event: any): void {
+    const file: File = event.target.files[0];
+    this.fileImage = file;
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.cateImage = e.target.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 
   showModal() {
     this.cateDTO = new RestaurantCategoryDTO();
     this.isVisibleCreateModal = true;
+    this.cateImage = '';
+    this.fileImage = new File([], '');
   }
 
   handleUpdateCategory(cate: RestaurantCategory<string>) {
+    this.cateImage = cate.image ?? '';
     this.isUpdate = true;
     this.isVisibleCreateModal = true;
     this.cateDTO = cate;
@@ -93,6 +131,10 @@ export class ListCategoryComponent implements OnInit {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisibleCreateModal = false;
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
   }
 
   constructor(

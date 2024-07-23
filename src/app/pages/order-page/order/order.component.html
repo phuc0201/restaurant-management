@@ -5,18 +5,19 @@
   </div>
 
   <button (click)="loadOrders()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
-    <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+    <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="reload"></i>
   </button>
 </div>
 
 <nz-tabset [nzSelectedIndex]="tabIndexSelected" nzSize="large">
   <nz-tab nzTitle="Pending Orders">
-    <app-list-order [orderTypeIsPending]="true"></app-list-order>
+    <app-list-order [reload]="reload" (reloadChange)="reloadOrder($event)" [orderTypeIsPending]="true"></app-list-order>
   </nz-tab>
   <nz-tab nzTitle="Active Orders">
-    <app-list-order [orderTypeIsPending]="false"></app-list-order>
+    <app-list-order [reload]="reload" (reloadChange)="reloadOrder($event)"
+      [orderTypeIsPending]="false"></app-list-order>
   </nz-tab>
   <nz-tab nzTitle="Order History">
-    <app-order-history></app-order-history>
+    <app-order-history [reload]="reload" [orders]="orders"></app-order-history>
   </nz-tab>
 </nz-tabset>

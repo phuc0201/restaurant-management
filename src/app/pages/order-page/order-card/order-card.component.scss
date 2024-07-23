@@ -1,0 +1,7 @@
+::ng-deep .cancel_reason_modal .ant-modal-content {
+  @apply overflow-hidden rounded-lg;
+}
+
+::ng-deep .cancel_reason_modal .ant-modal {
+  @apply top-10;
+}

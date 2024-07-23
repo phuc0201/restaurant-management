@@ -1,0 +1,13 @@
+<div class="user-info-card rounded-lg p-2">
+  <div class="flex gap-5">
+    <img [src]="userInfo.avatar" onerror="this.src='assets/img/avatars/restaurant-avatar.jpg'"
+      class="w-24 h-24 rounded-md object-cover">
+    <div class="flex flex-col items-start gap-1">
+      <span class="text-2xl font-bold text-black">
+        {{ userInfo.full_name }}
+      </span>
+      <span class="text-gray-500">phone: {{ userInfo.phone }}</span>
+      <nz-tag [nzColor]="'green'">CUSTOMER</nz-tag>
+    </div>
+  </div>
+</div>

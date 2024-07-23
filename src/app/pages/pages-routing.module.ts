@@ -31,7 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./restaurant-page/restaurant-page.module').then(m => m.RestaurantPageModule),
         title: 'Restaurant',
         data: {
-          breadcrumb: 'Restaurant'
+          breadcrumb: 'Menu'
         },
       },
       {
@@ -48,6 +48,14 @@ const routes: Routes = [
         title: 'Campaign',
         data: {
           breadcrumb: 'Campaign'
+        },
+      },
+      {
+        path: 'account',
+        loadChildren: () => import('./account-page/account-page.module').then(m => m.AccountPageModule),
+        title: 'Account',
+        data: {
+          breadcrumb: 'Account'
         },
       }
     ]

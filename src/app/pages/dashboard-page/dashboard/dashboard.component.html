@@ -11,9 +11,10 @@
 
 <div nz-row nzGutter="20" class="mt-5 pb-5">
   <div nz-col nzSpan="16">
-    <app-map></app-map>
+    <app-map [zoomValue]="15" [locationMarkers]="[locationMarker]"></app-map>
   </div>
   <div nz-col nzSpan="8">
+    <!-- <app-rating-points-card></app-rating-points-card> -->
     <app-top-products></app-top-products>
   </div>
 </div>

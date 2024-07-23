@@ -10,7 +10,7 @@ export class ModifierGroups {
 
 
 export class ModifierGroupsDTO {
-  _id?: string = '';
+  _id?: string;
   name: string = '';
   min: number = 0;
   max: number = 1;

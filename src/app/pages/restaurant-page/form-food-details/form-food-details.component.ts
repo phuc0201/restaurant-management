@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CreateFoodItemDTO } from 'src/app/core/models/restaurant/food-items.model';
 import { ModifierGroupsDTO } from 'src/app/core/models/restaurant/modifier-groups.model';
 import { Modifier, ModifierDTO } from 'src/app/core/models/restaurant/modifier.model';
 import { RestaurantCategory } from 'src/app/core/models/restaurant/restaurant-category.model';
+import { ReviewFoodItem } from 'src/app/core/models/restaurant/reviews.mode';
+import { FormatService } from 'src/app/core/services/common/format.serive';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
+import { ReviewService } from 'src/app/core/services/review.service';
 
 @Component({
   selector: 'app-form-food-details',
@@ -28,6 +32,7 @@ export class FormFoodDetailsComponent implements OnInit, OnChanges {
   listOfControl: Array<{ id: number; controlInstance: string; }> = [];
   isVisibleModifierGrs = false;
   isUpdateMdGrp: boolean = false;
+  reviews: ReviewFoodItem[] = [];
 
   showModal(): void {
     this.isVisibleModifierGrs = true;
@@ -74,13 +79,13 @@ export class FormFoodDetailsComponent implements OnInit, OnChanges {
   }
 
   uploadImage(event: any): void {
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
+    this.foodItemDTO.fileImage = file;
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.foodImage = e.target.result as string;
     };
     reader.readAsDataURL(file);
-    this.foodItemDTO.image = file;
   }
 
   removeModifier(mdIndex: number, mgrIndex: number): void {
@@ -95,7 +100,20 @@ export class FormFoodDetailsComponent implements OnInit, OnChanges {
     this.foodItemDTO.modifier_groups.splice(index, 1);
   }
 
+  formatDate(date: string): string {
+    return this.formatService.formatDate(date);
+  }
+
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id') as string;
+    if (id) {
+      this.reviewSrv.getReviewForFoodItem(id).subscribe(data => {
+        this.reviews = data;
+        console.log(this.reviews);
+
+      });
+    }
+
     this.resSrv.getCategories().subscribe(data => {
       this.categories = data;
       if (this.foodItemDTO.category_id === '') {
@@ -110,5 +128,8 @@ export class FormFoodDetailsComponent implements OnInit, OnChanges {
 
   constructor(
     private resSrv: RestaurantService,
+    private formatService: FormatService,
+    private reviewSrv: ReviewService,
+    private route: ActivatedRoute
   ) { }
 }

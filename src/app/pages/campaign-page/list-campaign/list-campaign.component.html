@@ -1,11 +1,23 @@
-<div class="flex items-start mb-5">
+<div class="flex items-start mb-5 justify-between">
   <button (click)="createCampaignModal()" class="bg-primary px-3 rounded-md text-white font-medium h-10">
     Add campaign
     <i class="fa-solid fa-plus"></i>
   </button>
+
+  <div class="flex justify-between items-center gap-3 ">
+    <div>
+      <input [(ngModel)]="searchValue" (ngModelChange)="search($event)" type="text" placeholder="Type the campaign"
+        class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+    </div>
+
+    <button (click)="loadCampaigns()" class="bg-primary text-white flex h-10 aspect-square rounded-md">
+      <i class="fa-solid fa-rotate m-auto" [class.animate-spin]="isLoading"></i>
+    </button>
+  </div>
 </div>
 <div class="px-5 pt-5 border border-gray-200 rounded-md">
-  <nz-table #menuTable [nzData]="campaigns" nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
+  <nz-table #menuTable [nzData]="campaignsForSearch" nzFrontPagination="true" [nzScroll]="{ y: '500px' }"
+    class="h-full">
     <thead>
       <tr>
         <th nzWidth="200px">Image</th>

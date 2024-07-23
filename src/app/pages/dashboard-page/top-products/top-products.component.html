@@ -3,22 +3,26 @@
   <div class="h-[1px] w-full bg-gray-200"></div>
 
   <div class="w-full">
-    <ng-container *ngFor="let item of [1,2,3,4]; let last = last">
-      <ng-container [ngTemplateOutlet]="productCardTpl"></ng-container>
+    <ng-container *ngFor="let item of food.foodItems; let last = last">
+      <ng-container *ngTemplateOutlet="productCardTpl; context: { fooditem: item }"></ng-container>
       <div *ngIf="!last" class="h-[1px] bg-gray-200 w-full"></div>
     </ng-container>
   </div>
 </div>
 
 
-<ng-template #productCardTpl>
+<ng-template #productCardTpl let-fooditem="fooditem">
   <div class="flex justify-between w-full p-4 px-0">
     <div class="flex gap-4">
-      <img src="assets/img/foods/food-default.webp" class="w-16 h-16 object-cover rounded-md">
-      <span>Bánh tráng nướng</span>
+      <img [src]="fooditem.image" onerror="this.src='assets/img/foods/food-default.webp'"
+        class="w-16 h-16 object-cover rounded-md">
+      <span>{{ fooditem.name }}</span>
     </div>
-    <a [routerLink]="['/']" class="font-bold text-primary my-auto hover:text-primary hover:underline">
-      view details
-    </a>
+    <div class="flex flex-col justify-between items-end">
+      <a [routerLink]="['/']" class="font-bold text-primary hover:text-primary hover:underline">
+        view details
+      </a>
+      <span>{{ fooditem.price.toLocaleString("vi-VN", { style:"currency", currency:"VND" }) }}</span>
+    </div>
   </div>
 </ng-template>

@@ -9,7 +9,7 @@ export class SocketService {
   private socket!: Socket;
   config: SocketIoConfig = {
     url: 'http://localhost:8080/socket', options: {
-      reconnection: false
+      reconnection: true
     }
   };
   constructor() {

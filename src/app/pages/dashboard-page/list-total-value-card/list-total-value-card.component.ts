@@ -9,19 +9,19 @@ export class ListTotalValueCardComponent {
   listData = [
     {
       title: 'Orders',
-      value: 20
+      value: 8
     },
     {
-      title: 'Reviews',
-      value: 20
+      title: 'Customers',
+      value: 4
     },
     {
       title: 'Total revenue',
-      value: 20000000
+      value: 640000
     },
     {
-      title: 'Products',
-      value: 20
+      title: 'Foods',
+      value: 19
     }
   ];
 }

@@ -10,6 +10,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -50,7 +51,8 @@ const routes: Routes = [
 const plugins = [
   PanigationComponent,
   BreadcrumbComponent,
-  NzEmptyModule
+  NzEmptyModule,
+  NzRateModule
 ];
 @NgModule({
   declarations: [

@@ -12,7 +12,13 @@ export class CreateFoodItemComponent {
 
   create(): void {
     const { _id, ...dto } = this.foodItemDTO;
-    this.resSrv.createFoodItem(dto).subscribe();
+    this.resSrv.createFoodItem(dto).subscribe({
+      next: fooditem => {
+        if (dto.fileImage !== undefined) {
+          this.resSrv.updateFoodItemImg(fooditem._id, dto.fileImage as File).subscribe();
+        }
+      }
+    });
   }
 
   constructor(

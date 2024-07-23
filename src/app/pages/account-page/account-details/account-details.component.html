@@ -1,0 +1,77 @@
+<div class="flex items-center gap-10">
+  <div class="display-animations">
+    <img [src]="account.avatar === '' ? 'assets/img/avatars/user.png' : account.avatar"
+      onerror="this.src='assets/img/avatars/user.png'" class="w-56 h-56 object-cover rounded-full">
+  </div>
+
+  <div class="flex flex-col gap-5">
+    <div class="flex items-center gap-4">
+      <span class="font-bold">Fullname:</span>
+      <span>{{ account.full_name == '' ? '........' : account.full_name}}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="font-bold">Email:</span>
+      <span>{{ account.email == '' ? '........' : account.email }}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="font-bold">Address:</span>
+      <span>{{ account.address == '' ? '........' : account.address }}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="font-bold">Phone:</span>
+      <span>{{ account.phone == '' ? '........' : account.phone }}</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="font-bold">Gender:</span>
+      <span>{{ account.gender ? 'Male': 'Female' }}</span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="mt-5 flex justify-end">
+  <input [(ngModel)]="searchValue" (ngModelChange)="search($event)" type="text" placeholder="Type the address"
+    class="outline-none rounded-md !shadow-none border border-gray-400  focus:border-green2 focus:ring-primary w-96 h-10">
+</div>
+
+<div class="px-5 pt-5 border border-gray-200 rounded-md mt-5">
+  <nz-table #menuTable [nzData]="ordersForSearch" nzFrontPagination="true" [nzScroll]="{ y: '500px' }" class="h-full">
+    <thead>
+      <tr>
+        <th>Phone</th>
+        <th>Order time</th>
+        <th>Order status</th>
+        <th>Delivery address</th>
+        <th>Delivery fare</th>
+        <th [nzRight]="true" nzWidth="150px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of menuTable.data; let index = index">
+        <td>{{ data.phone }}</td>
+        <td>{{ formatDate(data.order_time) }}</td>
+        <td>
+          <nz-tag [nzColor]="getTagColorForOrderStatus(data.order_status)">{{ data.order_status }}</nz-tag>
+        </td>
+        <td>
+          {{ data.delivery_location.address }}
+        </td>
+        <td>{{ data.delivery_fare }}</td>
+        <!-- <td>
+          <nz-tag [nzColor]="getTagColorForPaymentMethod('VNPAY')">{{ data. }}</nz-tag>
+        </td> -->
+        <td [nzRight]="true">
+          <div class="flex items-center justify-center">
+            <a [routerLink]="['/order/details', data._id]"
+              class="w-10 h-10 text-center hover:text-white bg-primary rounded-md text-white flex">
+              <i class="fa-regular fa-eye m-auto"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<!-- order/details/669628396a8e07bea671b86e -->

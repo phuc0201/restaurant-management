@@ -28,6 +28,21 @@ body::-webkit-scrollbar-thumb {
 /* body::-webkit-scrollbarbody {
   @apply fixed left-0 top-0 w-full overflow-y-scroll;
 } */
+
+.display-animation {
+  animation-name: displayContent;
+  animation-duration: 0.7s;
+}
+
+@keyframes displayContent {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 a {
   @apply text-black hover:text-black;
 }

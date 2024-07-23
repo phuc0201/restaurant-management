@@ -16,8 +16,26 @@ export class ListRestaurantFoodItemComponent implements OnInit {
   foodDetails = new FoodItems<ModifierGroups>;
   options: string[] = ['All'];
   menu: RestaurantCategory<FoodItems<string>>[] = [];
+  menuForSearch: RestaurantCategory<FoodItems<string>>[] = [];
   isLoading: boolean = false;
   cateSelected: number = 0;
+  searchValue: string = '';
+
+  normalizeString(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  search(name: string) {
+    setTimeout(() => {
+      this.menuForSearch = this.menu.map(cate => {
+        const newFood = cate.food_items.filter(food => this.normalizeString(food.name.toLowerCase()).includes(this.normalizeString(name.toLowerCase())));
+        const newCate = { ...cate };
+        newCate.food_items = newFood;
+        return newCate;
+      });
+    }, 1000);
+  }
+
 
   formatDate(isoDate: string): string {
     return this.formatSrv.formatDate(isoDate);
@@ -38,6 +56,9 @@ export class ListRestaurantFoodItemComponent implements OnInit {
         allItems.food_items = allFoodItems;
 
         this.menu.unshift(allItems);
+
+
+        this.menuForSearch = [...this.menu];
       },
       complete: () => {
         setTimeout(() => {
@@ -53,7 +74,7 @@ export class ListRestaurantFoodItemComponent implements OnInit {
   }
 
   get getFoodItemsByCategory() {
-    return this.menu[this.cateSelected].food_items;
+    return this.menuForSearch[this.cateSelected].food_items;
   }
 
   showFoodDetails(data: FoodItems<ModifierGroups>): void {

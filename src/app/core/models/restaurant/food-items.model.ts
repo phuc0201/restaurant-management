@@ -1,5 +1,8 @@
 import { ModifierGroupsDTO } from "./modifier-groups.model";
-
+export class FoodItemPagination {
+  totalPage: number = 0;
+  foodItems: FoodItems<string>[] = [];
+}
 export class FoodItems<T> {
   _id: string = '';
   name: string = 'Loading....';
@@ -19,6 +22,7 @@ export class FoodItemDTO<T> {
   image: string = '';
   price: number = 0;
   modifier_groups: T[] = [];
+  fileImage?: File;
 }
 
 export class CreateFoodItemDTO extends FoodItemDTO<ModifierGroupsDTO> {

@@ -25,7 +25,7 @@ export type ChartOptions = {
 export class CircleChartComponent {
   @ViewChild("circleChart") chart!: ChartComponent;
   chartOptions: Partial<ChartOptions> = {
-    series: [70],
+    series: [62.5],
     chart: {
       height: 350,
       type: "radialBar"

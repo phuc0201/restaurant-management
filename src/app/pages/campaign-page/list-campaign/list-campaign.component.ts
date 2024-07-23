@@ -15,6 +15,19 @@ import { FormCampaignComponent } from '../form-campaign/form-campaign.component'
 export class ListCampaignComponent implements OnInit {
   restaurant = new Restaurant();
   campaigns: Campaign[] = [];
+  campaignsForSearch: Campaign[] = [];
+  isLoading: boolean = false;
+  searchValue: string = '';
+
+  normalizeString(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  search(name: string) {
+    setTimeout(() => {
+      this.campaignsForSearch = this.campaigns.filter(cp => this.normalizeString(cp.name.toLowerCase()).includes(this.normalizeString(name.toLowerCase())));
+    }, 1000);
+  }
 
   formatDate(isoDate: string): string {
     return this.formatSrv.formatDate(isoDate);
@@ -49,8 +62,15 @@ export class ListCampaignComponent implements OnInit {
   }
 
   loadCampaigns(): void {
-    this.campaignSrv.getCampaigns(this.restaurant._id).subscribe(cmp => {
-      this.campaigns = cmp;
+    this.isLoading = true;
+    this.campaignSrv.getCampaigns(this.restaurant._id).subscribe({
+      next: cmp => {
+        this.campaigns = cmp;
+        this.campaignsForSearch = cmp;
+      },
+      complete: () => {
+        setTimeout(() => { this.isLoading = false; }, 500);
+      }
     });
   }
 

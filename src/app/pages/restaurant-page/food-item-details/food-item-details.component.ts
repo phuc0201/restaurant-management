@@ -16,7 +16,13 @@ export class FoodItemDetailsComponent implements OnInit {
 
   updateFoodItem() {
     this.foodItemDTO._id = this.foodDetails._id;
-    this.resSrv.updateFoodItem(this.foodItemDTO).subscribe();
+    this.resSrv.updateFoodItem(this.foodItemDTO).subscribe({
+      complete: () => {
+        if (this.foodItemDTO.fileImage !== undefined) {
+          this.resSrv.updateFoodItemImg(this.foodDetails._id, this.foodItemDTO.fileImage as File).subscribe();
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -44,6 +50,7 @@ export class FoodItemDetailsComponent implements OnInit {
           });
 
           return {
+            _id: group._id,
             name: group.name,
             min: group.min,
             max: group.max,
